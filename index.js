@@ -174,7 +174,7 @@ function finishDecryptRaw (buffer, salt, compressed, scryptBuf) {
   var d = BigInteger.fromBuffer(privateKey)
   var address = getAddress(d, compressed)
   var checksum = hash256(address).slice(0, 4)
-  assert.deepEqual(salt, checksum)
+  assert.deepStrictEqual(salt, checksum)
 
   return {
     privateKey: privateKey,
@@ -226,7 +226,7 @@ function prepareDecryptECMult (buffer, passphrase, progressCallback, scryptParam
   var compressed = (flag & 0x20) !== 0
   var hasLotSeq = (flag & 0x04) !== 0
 
-  assert.equal((flag & 0x24), flag, 'Invalid private key.')
+  assert.strictEqual((flag & 0x24), flag, 'Invalid private key.')
 
   var addressHash = buffer.slice(2, 6)
   var ownerEntropy = buffer.slice(6, 14)
